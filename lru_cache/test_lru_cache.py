@@ -21,13 +21,13 @@ class CacheTests(unittest.TestCase):
         self.cache.set('item2', 'b')
         self.cache.set('item3', 'c')
 
-        self.assertEqual(self.cache.get('item1'), 'a')
-        self.cache.set('item4', 'd')
+        self.assertEqual(self.cache.get('item1'), 'a') #makes it item2 item3 item1
+        self.cache.set('item4', 'd') #adds item4, deletes item2, leaves 1,3,4
 
         self.assertEqual(self.cache.get('item1'), 'a')
         self.assertEqual(self.cache.get('item3'), 'c')
         self.assertEqual(self.cache.get('item4'), 'd')
-        self.assertIsNone(self.cache.get('item2'))
+        self.assertIsNone(self.cache.get('item2')) #None
 
     def test_cache_nonexistent_retrieval(self):
         self.assertIsNone(self.cache.get('nonexistent'))
