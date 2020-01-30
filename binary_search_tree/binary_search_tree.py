@@ -35,30 +35,24 @@ class BinarySearchTree:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        if target < self.value:#move left
-            if target == self.left.value:#move left
+        if target < self.value:#move left and run code until you return something
+            if target == self.left.value: #return true
                 return True
-            elif self.left.left == None:
+            elif self.left.left == None: #if no left and no match, return False
                 return False
-            else:
-                self.left.contains(target)
-        if target > self.value:#move right
+        if target > self.value:#move right and return code until you return something
             if target == self.right.value:#move right
                 return True
-            elif self.right.right == None:
+            elif self.right.right == None: #if no more rights and no match, return false
                 return False
-            # elif self.value > self.right.value:
-            #     return False
-            else:
-                self.right.contains(target)
         return False
 
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if not self.right:
+        if not self.right: #if there is no self.right just return where your current value (this could be 3 loops down the line), greater numbers will be to the right. When the rights run out, you've found your largest number
             return self.value
-        elif self.right:
+        elif self.right: #otherwise, if there is a right, call the function with the new value and repeat until there are no more rights.
             return self.right.get_max()
 
 
@@ -79,8 +73,8 @@ class BinarySearchTree:
     def in_order_print(self, node):
         curr=node# set current to current node
         if curr.left: #if current node has a left child
-            self.in_order_print(curr.left)
-        print(curr.value)
+            self.in_order_print(curr.left) #recall func using left child.
+        print(curr.value)#this is proper placement
         if curr.right:
             self.in_order_print(curr.right)
         
