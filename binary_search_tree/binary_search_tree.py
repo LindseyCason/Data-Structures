@@ -1,7 +1,6 @@
 import sys
-sys.path.append('../queue_and_stack')
-# from dll_queue import Queue
-# from dll_stack import Stack
+from dll_queue import Queue
+from dll_stack import Stack
 
 # ### Binary Search Trees
 # * Should have the methods `insert`, `contains`, `get_max`.
@@ -78,25 +77,50 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        curr=node# set current to current node
+        if curr.left: #if current node has a left child
+            self.in_order_print(curr.left)
+        print(curr.value)
+        if curr.right:
+            self.in_order_print(curr.right)
+        
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        q=Queue()
+        q.enqueue(node)#adding initial node to Queue
+        while q.len() > 0: #Until the Que is empty
+            pop=q.dequeue() #To remove from Queue and proceed to add it's children in code below
+            print(pop.value) #print the value that we popped off/out of the queue
+            if pop.left: #If the popped value has a left node(A CHILD, ADD THE CHILDREN TO THE QUEUE)
+                q.enqueue(pop.left)
+            if pop.right: #If the popped value has a right node(A CHILD, ADD THE CHILDREN TO THE QUEUE)
+                q.enqueue(pop.right)
+                #Since children have been added the process will repeat in the while loop until no children can be added
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        curr=node
+        s=Stack()
+        s.push(curr) #pushes node to stack
+        while s.len() > 0: #Until the stack is empty
+            pop=s.pop()
+            print(pop.value) #print the value of the popped item
+            if pop.right: #if popped item has children, add them to the stack
+                s.push(pop.right)
+            if pop.left:
+                s.push(pop.left)
+        
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
-    # Print In-order recursive DFT
-    def pre_order_dft(self, node):
-        pass
+    # # Print In-order recursive DFT
+    # def pre_order_dft(self, node):
+    #     pass
 
-    # Print Post-order recursive DFT
-    def post_order_dft(self, node):
-        pass
+    # # Print Post-order recursive DFT
+    # def post_order_dft(self, node):
+    #     pass
